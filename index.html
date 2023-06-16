@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>NYC AirBnb Dashboard</title>
+  <title>NYC Airbnb Dashboard</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
@@ -20,27 +20,27 @@
     <div class="row">
       <div class="col-md-2">
         <div class="well">
-          <h5>Ready</h5>
+          <h5>Neighborhood Group:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Ready</h3>
+            <h3 class="panel-title">Summary Statistics:</h3>
           </div>
           <div id="sample-metadata" class="panel-body"></div>
         </div>
       </div>
       <div class="col-md-5">
-        <div id="bar"></div>
+        <div id="map"></div>
       </div>
       <div class="col-md-5">
-        <div id="gauge"></div>
+        <div id="histogram"></div>
       </div>
     </div>
     <div class = "row"></div>
     <div class="row">
       <div class="col-md-12">
-        <div id="bubble"></div>
+        <div id="bar"></div>
       </div>
     </div>
   </div>
