@@ -2,6 +2,9 @@
 
 This readme provides an overview of potential interactive visualizations for an Airbnb dashboard based on a JavaScript implementation. The visualizations mentioned below can be used to explore the provided Airbnb dataset.
 
+## Dataset: NYC AirBnB Listing (2019)
+[AB_NYC_2019.csv](https://github.com/melissaprax/airbnb_dashboard/files/11765419/AB_NYC_2019.csv)
+
 ## Map Visualization (Melissa)
 - HighCharts: Utilize a tiled web map with points of interest to visualize the Airbnb listings on a map. You can find an example implementation using HighCharts at [Tiled Web Map with Points of Interest](https://www.highcharts.com/demo/maps/twm-oslo-attractions).
 - Leaflet: Display markers with custom icons to represent Airbnb listings on a map. You can refer to the Leaflet documentation's [Custom Icons example](https://leafletjs.com/examples/custom-icons/) for implementation details.
