@@ -1,16 +1,27 @@
 // Import d3 libary and create a function to load the data
 
-// Save the data source in a variable
-csv_path = "../data/AB_NYC_2019.csv"
+// Save the relative path to the dataset in a variable
+var relative_path = "../../data/AB_NYC_2019.csv";
 
-function loadData(csv_path) {
-    d3.csv(csv_path).then(function(data) {
+// Save the absolute path to the dataset in a variable
+var absolute_path = "C:\Users\e.a.wright\airbnb_dashboard\dashboard\data\AB_NYC_2019.csv";
+
+// Create a function to load the dataset using d3.csv
+function loadData(path) {
+    d3.csv(path).then(function(data) {
         console.log(data);
     });
 }
 
-// Call the function
-loadData(csv_path);
+// Call the loadData function
+loadData(absolute_path);
+
+// The data is not loading. I am getting "404 (Not Found)"
+
+
+// q: How do I set the root folder to be the dashboard folder?
+// a: 
+
 
 
 // Map Visualization
@@ -19,77 +30,57 @@ loadData(csv_path);
 
 // Price Distribution Visualization (Histogram)
 
-// Declare the chart dimensions and margins.
-const width = 960;
-const height = 500;
-const marginTop = 20;
-const marginRight = 20;
-const marginBottom = 30;
-const marginLeft = 40;
+// The purpose of this visualization is to show the distribution of Airbnb listing prices in NYC, filtered by neighborhood.
 
-// Intialize histogram
-var priceHistogram = dc.barChart("#histogram");
+// The user selects a neighborhood from the dropdown menu, and the histogram will update to show the distribution of prices for that neighborhood.
 
-// Bin the data.
-const bins = d3.bin()
-    .thresholds(40)
-    .value((d) => d.rate)
-  (unemployment);
+// The histogram will also update to show the distribution of prices for the entire city when the user selects "All Neighborhoods" from the dropdown menu.
 
-// Declare the x (horizontal position) scale.
-const x = d3.scaleLinear()
-    .domain([bins[0].x0, bins[bins.length - 1].x1])
-    .range([marginLeft, width - marginRight]);
 
-// Declare the y (vertical position) scale.
-const y = d3.scaleLinear()
-    .domain([0, d3.max(bins, (d) => d.length)])
-    .range([height - marginBottom, marginTop]);
+// Set 1: Load the data
 
-// Create the SVG container.
-const svg = d3.create("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("viewBox", [0, 0, width, height])
-    .attr("style", "max-width: 100%; height: auto;");
+// Note: We will expand upon the loadData function to create variables for each relevant column in the dataset.
 
-// Add a rect for each bin.
-svg.append("g")
-    .attr("fill", "steelblue")
-  .selectAll()
-  .data(bins)
-  .join("rect")
-    .attr("x", (d) => x(d.x0) + 1)
-    .attr("width", (d) => x(d.x1) - x(d.x0) - 1)
-    .attr("y", (d) => y(d.length))
-    .attr("height", (d) => y(0) - y(d.length));
+// function loadDataset(csv_path) {
+//     d3.csv(csv_path).then(function(data) {
+//         console.log(data);
 
-// Add the x-axis and label.
-svg.append("g")
-    .attr("transform", `translate(0,${height - marginBottom})`)
-    .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-    .call((g) => g.append("text")
-        .attr("x", width)
-        .attr("y", marginBottom - 4)
-        .attr("fill", "currentColor")
-        .attr("text-anchor", "end")
-        .text("Unemployment rate (%) →"));
+//         // Create variables for each column in the dataset
 
-// Add the y-axis and label, and remove the domain line.
-svg.append("g")
-    .attr("transform", `translate(${marginLeft},0)`)
-    .call(d3.axisLeft(y).ticks(height / 40))
-    .call((g) => g.select(".domain").remove())
-    .call((g) => g.append("text")
-        .attr("x", -marginLeft)
-        .attr("y", 10)
-        .attr("fill", "currentColor")
-        .attr("text-anchor", "start")
-        .text("↑ Frequency (no. of counties)"));
+//         // The only columns we need for this visualization are "neighbourhood_group" and "price"
+//         var id = data.id;
+//         var name = data.name;
+//         var host_id = data.host_id;
+//         var host_name = data.host_name;
+//         var neighbourhood_group = data.neighbourhood_group;
+//         var neighbourhood = data.neighbourhood;
+//         var latitude = data.latitude;
+//         var longitude = data.longitude;
+//         var room_type = data.room_type;
+//         var price = data.price;
+//         var minimum_nights = data.minimum_nights;
+//         var number_of_reviews = data.number_of_reviews;
+//         var last_review = data.last_review;
+//         var reviews_per_month = data.reviews_per_month;
+//         var calculated_host_listings_count = data.calculated_host_listings_count;
+//         var availability_365 = data.availability_365;
 
-// Return the SVG element.
-return svg.node();
+//         // Create a variable for the dropdown menu
+//         var dropdownMenu = d3.select("#selDataset");
+
+//         // Create a variable containing the unique values for the "neighbourhood_group" column
+//         var neighbourhoodGroups = data.map(data => data.neighbourhood_group).filter((value, index, self) => self.indexOf(value) === index);
+
+//         // Console log the unique values for the "neighbourhood_group" column to inspect them
+//         console.log(neighbourhoodGroups);
+        
+//         // Create a variable for dropdown menu options
+//         var dropdownOptions = dropdownMenu.property("options");
+//     });
+// }
+
+// // Call the loadDataset function
+// loadDataset(csv_path);
+
 
 // Room Type Visualization
-
-
