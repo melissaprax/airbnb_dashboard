@@ -89,10 +89,6 @@ svg.append("g")
 
 // Return the SVG element.
 return svg.node();
-}
-
-
-
 
 // Room Type Visualization
 
