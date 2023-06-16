@@ -1,4 +1,4 @@
-// Import d3 libary and create a function to load the data
+// Load data from CSV and console log it
 
 // Save the relative path to the dataset in a variable
 var relative_path = "../../data/AB_NYC_2019.csv";
@@ -14,7 +14,7 @@ function loadData(path) {
 }
 
 // Call the loadData function
-loadData(absolute_path);
+loadData(relative_path);
 
 // The data is not loading. I am getting "404 (Not Found)"
 
