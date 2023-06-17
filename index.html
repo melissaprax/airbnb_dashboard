@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>NYC AirBnB Dashboard</title>
+    <!-- Leaflet JavaScript code -->
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/style.css">
 </head>
 
 <body>
@@ -17,9 +21,11 @@
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
+    <div id="map" class="map"></div>
     <div class="row">
       <div class="col-md-2">
         <div class="well">
+            <!-- The div that holds our map -->
           <h5>Ready</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
@@ -48,7 +54,8 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="./static/js/app.js"></script>
-  <!-- <script src="./static/js/bonus.js"></script> -->
-  
+  <script src="./static/js/map.js"></script>
+
+
 </body>
 </html>
