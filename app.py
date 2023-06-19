@@ -60,8 +60,6 @@ def welcome():
     return render_template("index.html") # Note: This file, in the templates folder, needs to be completed.
 
 
-
-
 # Note: We are mapping/plotting Airbnb listing using the following fields:
 # ID, Name, Neighbourhood Group, Latitude, Longitude, Room Type, and Price.
 # Thus, we only need to query the database for these fields.    
@@ -87,5 +85,12 @@ def airbnb():
 
     return jsonify(all_airbnb)
 
-# This route, when called, 
+# Note for next programming session:
+# As a group, we need to decide on the following:
+# 1. Do we want to make multiple tables in the database?
+# 2. If so, what fields do we want to include in each table?
+# 3. If not, so be in. We can proceed.
+# 4. Do we want/need to have multiple API routes?
+# 5. We could simply have one API route that returns all the data in the database (or a subset of the data).
+# 6. Note: Check requirements and grading rubric for the project.
 
