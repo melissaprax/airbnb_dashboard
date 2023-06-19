@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Suicide Choropleth</title>
+
+    <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+  </head>
+  <body>
+    <div>
+      <h1>Suicides of Clowns by Country</h1>
+    </div>
+
+    <div class = "container">
+      <label for="sel_year">Choose a year:</label>
+
+      <select name="sel_year" id="sel_year" class='container'">
+        <option value="s2017">2017</option>
+        <option value="s2018">2018</option>
+        <option value="s2019">2019</option>
+        <option value="s2020">2020</option>
+      </select>
+    </div>
+    <!-- The div where we will inject our map -->
+    <div id="map"></div>
+
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+
+    <!-- Our JS -->
+    <script type="text/javascript" src="static/js/config.js"></script>
+    <script type="text/javascript" src="static/js/logic.js"></script>
+
+  </body>
+</html>
