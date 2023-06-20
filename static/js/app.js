@@ -26,6 +26,9 @@ loadData(relative_path);
 // The histogram will also update to show the distribution of prices for the entire city when the user selects "All Neighborhoods" from the dropdown menu.
 
 
+// Note: The neighbourhood groups are: 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island', 'Bronx'
+// The defualt group will be: Staten Island
+
 // Step 1: Load the data
 
 function loadDataset(path) {
