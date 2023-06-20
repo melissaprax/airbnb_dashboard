@@ -21,7 +21,7 @@ loadData(relative_path);
 
 // The purpose of this visualization is to show the distribution of Airbnb listing prices in NYC, filtered by neighborhood.
 
-// The user selects a neighborhood from the dropdown menu, and the histogram will update to show the distribution of prices for that neighborhood.
+// The user selects a neighborhood group from the dropdown menu, and the histogram will update to show the distribution of prices for that neighborhood group.
 
 // The histogram will also update to show the distribution of prices for the entire city when the user selects "All Neighborhoods" from the dropdown menu.
 
@@ -117,8 +117,8 @@ function loadDataset(path) {
             createHistogram(neighbourhoodGroup);
         }
 
-        // Get the initial value for the dropdown menu. Note: ideally, the default will be "All Neighborhoods", but for now it's "Brooklyn"
-        var initialNeighbourhoodGroup = neighbourhoodGroups[0];
+        // Set the initial neighbourhood group to be Staten Island
+        var initialNeighbourhoodGroup = "Staten Island";
 
         console.log(initialNeighbourhoodGroup);
 
