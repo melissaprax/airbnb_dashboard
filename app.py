@@ -90,7 +90,7 @@ def airbnb():
 # 1. Do we want to make multiple tables in the database?
 # 2. If so, what fields do we want to include in each table?
 # 3. If not, so be in. We can proceed.
-# 4. Do we want/need to have multiple API routes?
+# 4. Do we want/need to have multiple API routes? Have routes for each neighborhood 
 # 5. We could simply have one API route that returns all the data in the database (or a subset of the data).
 # 6. Note: Check requirements and grading rubric for the project.
 
