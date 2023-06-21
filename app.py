@@ -85,6 +85,86 @@ def airbnb():
 
     return jsonify(all_airbnb)
 
+
+@app.route("/api/staten-island")
+def staten_island():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+
+    # Create a dictionary from the row data and append to a list of all_airbnb
+    staten_island_list = []
+    for neighbourhood_group, latitude, longitude, room_type in results:
+        staten_island_dict = {}
+        staten_island_dict["neighbourhood_group"] = neighbourhood_group
+        staten_island_dict["latitude"] = latitude
+        staten_island_dict["longitude"] = longitude
+        staten_island_dict["room_type"] = room_type
+        staten_island_list.append(staten_island_dict)
+
+    return jsonify(staten_island_list)
+
+@app.route("/api/brooklyn")
+def brooklyn():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Brooklyn").all()
+
+    # Create a dictionary from the row data and append to a list of all_airbnb
+    brooklyn_list = []
+    for neighbourhood_group, latitude, longitude, room_type in results:
+        brooklyn_dict = {}
+        brooklyn_dict["neighbourhood_group"] = neighbourhood_group
+        brooklyn_dict["latitude"] = latitude
+        brooklyn_dict["longitude"] = longitude
+        brooklyn_dict["room_type"] = room_type
+        brooklyn_list.append(brooklyn_dict)
+
+    return jsonify(brooklyn_list)
+
+@app.route("/api/manhattan")
+def staten_island():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+
+    # Create a dictionary from the row data and append to a list of all_airbnb
+    staten_island_list = []
+    for neighbourhood_group, latitude, longitude, room_type in results:
+        staten_island_dict = {}
+        staten_island_dict["neighbourhood_group"] = neighbourhood_group
+        staten_island_dict["latitude"] = latitude
+        staten_island_dict["longitude"] = longitude
+        staten_island_dict["room_type"] = room_type
+        staten_island_list.append(staten_island_dict)
+
+    return jsonify(staten_island_list)
+
+@app.route("/api/queens")
+def staten_island():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+
+    # Create a dictionary from the row data and append to a list of all_airbnb
+    staten_island_list = []
+    for neighbourhood_group, latitude, longitude, room_type in results:
+        staten_island_dict = {}
+        staten_island_dict["neighbourhood_group"] = neighbourhood_group
+        staten_island_dict["latitude"] = latitude
+        staten_island_dict["longitude"] = longitude
+        staten_island_dict["room_type"] = room_type
+        staten_island_list.append(staten_island_dict)
+
+    return jsonify(staten_island_list)
+
+@app.route("/api/bronx")
+def staten_island():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+
+    # Create a dictionary from the row data and append to a list of all_airbnb
+    staten_island_list = []
+    for neighbourhood_group, latitude, longitude, room_type in results:
+        staten_island_dict = {}
+        staten_island_dict["neighbourhood_group"] = neighbourhood_group
+        staten_island_dict["latitude"] = latitude
+        staten_island_dict["longitude"] = longitude
+        staten_island_dict["room_type"] = room_type
+        staten_island_list.append(staten_island_dict)
+
+    return jsonify(staten_island_list)
 # Note for next programming session:
 # As a group, we need to decide on the following:
 # 1. Do we want to make multiple tables in the database?
