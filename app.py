@@ -119,52 +119,54 @@ def brooklyn():
     return jsonify(brooklyn_list)
 
 @app.route("/api/manhattan")
-def staten_island():
-    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+def manhattan():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Manhattan").all()
 
     # Create a dictionary from the row data and append to a list of all_airbnb
-    staten_island_list = []
+    manhattan_list = []
     for neighbourhood_group, latitude, longitude, room_type in results:
-        staten_island_dict = {}
-        staten_island_dict["neighbourhood_group"] = neighbourhood_group
-        staten_island_dict["latitude"] = latitude
-        staten_island_dict["longitude"] = longitude
-        staten_island_dict["room_type"] = room_type
-        staten_island_list.append(staten_island_dict)
+        manhattan_dict = {}
+        manhattan_dict["neighbourhood_group"] = neighbourhood_group
+        manhattan_dict["latitude"] = latitude
+        manhattan_dict["longitude"] = longitude
+        manhattan_dict["room_type"] = room_type
+        manhattan_list.append(manhattan_dict)
 
-    return jsonify(staten_island_list)
+    return jsonify(manhattan_list)
 
 @app.route("/api/queens")
-def staten_island():
-    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+def queens():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Queens").all()
 
     # Create a dictionary from the row data and append to a list of all_airbnb
-    staten_island_list = []
+    queens_list = []
     for neighbourhood_group, latitude, longitude, room_type in results:
-        staten_island_dict = {}
-        staten_island_dict["neighbourhood_group"] = neighbourhood_group
-        staten_island_dict["latitude"] = latitude
-        staten_island_dict["longitude"] = longitude
-        staten_island_dict["room_type"] = room_type
-        staten_island_list.append(staten_island_dict)
+        queens_dict = {}
+        queens_dict["neighbourhood_group"] = neighbourhood_group
+        queens_dict["latitude"] = latitude
+        queens_dict["longitude"] = longitude
+        queens_dict["room_type"] = room_type
+        queens_list.append(queens_dict)
 
-    return jsonify(staten_island_list)
+    return jsonify(queens_list)
 
 @app.route("/api/bronx")
-def staten_island():
-    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Staten Island").all()
+def bronx():
+    results = db.session.query(Airbnb.neighbourhood_group, Airbnb.latitude, Airbnb.longitude, Airbnb.room_type).filter(Airbnb.neighbourhood_group=="Bronx").all()
 
     # Create a dictionary from the row data and append to a list of all_airbnb
-    staten_island_list = []
+    bronx_list = []
     for neighbourhood_group, latitude, longitude, room_type in results:
-        staten_island_dict = {}
-        staten_island_dict["neighbourhood_group"] = neighbourhood_group
-        staten_island_dict["latitude"] = latitude
-        staten_island_dict["longitude"] = longitude
-        staten_island_dict["room_type"] = room_type
-        staten_island_list.append(staten_island_dict)
+        bronx_dict = {}
+        bronx_dict["neighbourhood_group"] = neighbourhood_group
+        bronx_dict["latitude"] = latitude
+        bronx_dict["longitude"] = longitude
+        bronx_dict["room_type"] = room_type
+        bronx_list.append(bronx_dict)
 
-    return jsonify(staten_island_list)
+    return jsonify(bronx_list)
+
+
 # Note for next programming session:
 # As a group, we need to decide on the following:
 # 1. Do we want to make multiple tables in the database?
@@ -173,4 +175,3 @@ def staten_island():
 # 4. Do we want/need to have multiple API routes? Have routes for each neighborhood 
 # 5. We could simply have one API route that returns all the data in the database (or a subset of the data).
 # 6. Note: Check requirements and grading rubric for the project.
-

@@ -3,6 +3,8 @@
 // Save the relative path to the dataset in a variable
 var relative_path = "../../data/AB_NYC_2019.csv";
 
+let api_path = "/api/airbnb"
+
 // Create a function to load the dataset using d3.csv
 function loadData(path) {
     d3.csv(path).then(function(data) {
