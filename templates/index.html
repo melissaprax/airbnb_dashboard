@@ -8,7 +8,8 @@ Note: We have to import D3.js library to use it. -->
 <!-- Note: We also have to import Plotly.js -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <title>Interactive Histogram</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -16,8 +17,16 @@ Note: We have to import D3.js library to use it. -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{{url_for("static",filename="js/app.js")}}"></script> <!-- This is the path to the app.js file -->
 </head>
+
+<!-- Create a simple body with a title, dropdown menu, and histogram-->
 <body>
-    <h1>Interactive Dashboard</h1>
+    <h1>Interactive Histogram</h1>
+    <div class="row">
+        <div class="col-md-2">
+          <div class="well">
+            <h5>Select Neighbourhood:</h5>
+            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          </div>
     <div id="histogram"></div>
 </body>
-</html>
+
