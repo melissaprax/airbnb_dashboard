@@ -29,17 +29,71 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     var filteredData = data.filter(d => d.neighbourhood_group === selection);
     // Create array of price data
     var filteredPrice = filteredData.map(d => d.price);
+
+    // Create a variable for a string to be concatenated in the title of the histogram for each neighbourhood group
+    var title = "";
+    // Set title for Bronx
+    if (selection === "Bronx") {
+        title = "Bronx Airbnb Listing Price Distribution";
+    }
+    // Set title for Brooklyn
+    else if (selection === "Brooklyn") {
+        title = "Brooklyn Airbnb Listing Price Distribution";
+    }
+    // Set title for Manhattan
+    else if (selection === "Manhattan") {
+        title = "Manhattan Airbnb Listing Price Distribution";
+    }
+    // Set title for Queens
+    else if (selection === "Queens") {
+        title = "Queens Airbnb Listing Price Distribution";
+    }
+    // Set title for Staten Island
+    else if (selection === "Staten Island") {
+        title = "Staten Island Airbnb Listing Price Distribution";
+    }
+
+    // Set the color of the histogram bars to be unique for each neighbourhood group
+    var color = "";
+    // Set Bronx to be Purple
+    if (selection === "Bronx") {
+        color = "purple";
+    }
+    // Set Brooklyn to be Blue
+    else if (selection === "Brooklyn") {
+        color = "blue";
+    }
+    // Set Manhattan to be Red
+    else if (selection === "Manhattan") {
+        color = "red";
+    }
+    // Set Queens to be Green
+    else if (selection === "Queens") {
+        color = "green";
+    }
+    // Set Staten Island to be Orange
+    else if (selection === "Staten Island") {
+        color = "orange";
+    }   
+
     // Create trace for histogram
     var trace = {
       x: filteredPrice,
-      type: "histogram"
+      type: "histogram",
+        marker: {
+            color: color,
+            line: {
+                color: "black",
+                width: 1
+            }
+        }
     };
     // Create data array for plot
     var plotData = [trace];
     // Create layout for plot
     var layout = {
-      title: "Price Distribution",
-      xaxis: { title: "Price"},
+      title: title,
+      xaxis: { title: "Price", range: [-25, 500]},
       yaxis: { title: "Count" }
     };
     // Plot the histogram
@@ -74,6 +128,14 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
 }).catch(function(error) {
   console.log("Error retrieving data:", error);
 });
+
+
+// Note: My goal is to set the range of the histogram to be within 2 standard deviations of the mean.
+
+
+
+
+
 
 
 // Draft I:
