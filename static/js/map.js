@@ -1,19 +1,27 @@
-csv_path = "../data/AB_NYC_2019.csv"
+var relative_path = "../../data/AB_NYC_2019.csv";
+var statenData ="../../data/Staten Island.csv";
 
-function loadData(csv_path) {
-    d3.csv(csv_path).then(function(data) {
+
+// Create a function to load the dataset using d3.csv
+function loadData(path) {
+    d3.csv(path).then(function(data) {
         console.log(data);
+        mapData(data);
+
     });
 }
 
-// Call the function
-loadData(csv_path);
+// Call the loadData function
+loadData(statenData);
+
 
 
 // Map Visualization
 var mapOptions = {
     center: [40.73, -74.0059],
-    zoom: 10
+    zoom: 10,
+    minZoom: 10,
+    maxZoom: 18
  }
 
 var map = new L.map('map', mapOptions);
@@ -21,3 +29,36 @@ var map = new L.map('map', mapOptions);
 var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
 map.addLayer(layer);
+
+//markers
+function mapData(data) {
+for (var i in data) {
+    var row = data[i];
+    console.log(row.latitude);
+    console.log(row.longitude);
+
+    //full set of data
+    //filter by neighborhood
+
+    try {
+
+
+        var marker = L.marker([row.latitude, row.longitude], {
+            opacity: 1
+        }).bindPopup(row.Title);
+
+        marker.addTo(map);
+
+
+    } catch (error) {
+
+        console.error('invalid data received', error);
+
+    }
+}
+}
+
+
+
+
+
