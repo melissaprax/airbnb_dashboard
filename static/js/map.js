@@ -32,6 +32,8 @@ map.addLayer(layer);
 
 //markers
 function mapData(data) {
+    var markers = L.markerClusterGroup();
+
 for (var i in data) {
     var row = data[i];
     console.log(row.latitude);
@@ -41,13 +43,16 @@ for (var i in data) {
     //filter by neighborhood
 
     try {
+        if(row.latitude && row.longitude){
+            markers.addLayer(L.marker([row.latitude, row.longitude]));
+            // map.addLayer(markers);
 
+            // var marker = L.marker([row.latitude, row.longitude], {
+            //     opacity: 1
+            // }).bindPopup(row.Title);
 
-        var marker = L.marker([row.latitude, row.longitude], {
-            opacity: 1
-        }).bindPopup(row.Title);
-
-        marker.addTo(map);
+            markers.addTo(map);
+        }
 
 
     } catch (error) {
