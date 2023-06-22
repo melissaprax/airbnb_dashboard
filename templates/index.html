@@ -1,0 +1,23 @@
+<!--  Question: What do you want to put here?
+Answer: I want to put my interactive histogram (part of the whole dashboard)
+Question: What package do you want to use?
+Answer: I want to use D3.js
+
+Note: We have to import D3.js library to use it. -->
+
+<!-- Note: We also have to import Plotly.js -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Histogram</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{url_for("static",filename="js/app.js")}}"></script> <!-- This is the path to the app.js file -->
+</head>
+<body>
+    <h1>Interactive Dashboard</h1>
+    <div id="histogram"></div>
+</body>
+</html>
