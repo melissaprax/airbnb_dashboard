@@ -129,11 +129,10 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   console.log("Error retrieving data:", error);
 });
 
-
-// Note: My goal is to set the range of the histogram to be within 2 standard deviations of the mean.
-
-
-
+// Notes for future reference: 
+// 1. Consider whether adding number of listing to the histogram would be useful
+// 2. Consider if standardizing the number of bins would be better than using the default
+// 3. Consider whether numerical summary statistics would be welcome additions to the dashboard
 
 
 
