@@ -1,59 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Airbnb API Routes</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    th, td {
-      text-align: left;
-      padding: 8px;
-    }
-    
-    th {
-      background-color: #f2f2f2;
-    }
-    
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-    
-    a {
-      text-decoration: none;
-      color: #000;
-    }
-  </style>
+    <title>Interactive Histogram</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{url_for("static",filename="js/app.js")}}"></script> <!-- This is the path to the app.js file -->
 </head>
 <body>
-  <h1>API Routes</h1>
-  <table>
-    <tr>
-      <th>Route</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td><a href="/route1">/route1</a></td>
-      <td>Route 1 description goes here.</td>
-    </tr>
-    <tr>
-      <td><a href="/route2">/route2</a></td>
-      <td>Route 2 description goes here.</td>
-    </tr>
-    <tr>
-      <td><a href="/route3">/route3</a></td>
-      <td>Route 3 description goes here.</td>
-    </tr>
-    <tr>
-      <td><a href="/route4">/route4</a></td>
-      <td>Route 4 description goes here.</td>
-    </tr>
-    <tr>
-      <td><a href="/route5">/route5</a></td>
-      <td>Route 5 description goes here.</td>
-    </tr>
-  </table>
+    <h1>Interactive Dashboard</h1>
+    <div id="histogram"></div>
 </body>
 </html>
