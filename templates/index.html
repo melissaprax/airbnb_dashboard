@@ -16,6 +16,11 @@ Note: We have to import D3.js library to use it. -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="{{url_for("static",filename="js/app.js")}}"></script> 
 </head>
 
@@ -29,4 +34,10 @@ Note: We have to import D3.js library to use it. -->
             <select id="selDataset" onchange="optionChanged(this.value)"></select>
           </div>
     <div id="histogram"></div>
+    <figure class="highcharts-figure">
+      <div id="container"></div>
+      <p class="highcharts-description">
+          Word clouds are cool.
+      </p>
+  </figure>
 </body>

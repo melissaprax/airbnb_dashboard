@@ -100,23 +100,76 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     Plotly.newPlot("histogram", plotData, layout);
   }
 
+  // Create a function to initialize word cloud of listing names
+  function initWordCloud(selection) {
+    // Filter data to only include selected neighbourhood group
+    var filteredData = data.filter(d => d.neighbourhood_group === selection);
+    // Create array of listing names
+    var filteredName = filteredData.map(d => d.name);
+    // Create a string of all listing names
+    var nameString = filteredName.join(" ");
+    // Create an array of all words in the string
+    var words = nameString.split(" ");
+    // Create an array of unique words
+    var uniqueWords = [...new Set(words)];
+    // Create an array of objects with each unique word and its frequency
+    var wordFrequency = uniqueWords.map(word => {
+      return {
+        word: word,
+        frequency: words.filter(w => w === word).length
+      };
+    });
+    // Create High Charts word cloud
+    Highcharts.chart("container", {
+      accessibility: {
+        screenReaderSection: {
+          beforeChartFormat:
+            "<h5>{chartTitle}</h5>" +
+            "<div>{chartSubtitle}</div>" +
+            "<div>{chartLongdesc}</div>" +
+            "<div>{viewTableButton}</div>"
+        }
+      },
+      series: [
+        {
+          type: "wordcloud",
+          data: wordFrequency,
+          name: "Occurrences"
+        }
+      ],
+      title: {
+        text: "Word Cloud of Listing Names"
+      },
+      subtitle: {
+        text: "Neighbourhood Group: " + selection
+      },
+      tooltip: {
+        pointFormat: "{series.name}: <b>{point.weight}</b>"
+      }
+    });
+  }
+}
+
   // Create function to update histogram when a new option is selected calling updateChart
-  function updateChart(selection) {
+  function updateCharts(selection) {
     // Call the initHistogram function to update the plot
     initHistogram(selection);
+    // Call the getWordCloudData function to update the word cloud
+    initWordCloud(selection);
   }
 
   // Create function to handle change in dropdown menu
   function optionChanged(selection) {
     // Call updateChart function with the new selection
-    updateChart(selection);
+    updateCharts(selection);
   }
 
   // Get the first selection to initialize the plot
   var firstSelection = dropdownOptions[0];
 
-  // Initialize the plot
+  // Initialize the charts
   initHistogram(firstSelection);
+  initWordCloud(firstSelection); // Left off here 8:59pm 4/25/2021
 
   // Set up event listener for when a new option is selected
   dropdownMenu.on("change", function() {
