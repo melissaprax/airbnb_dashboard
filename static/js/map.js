@@ -1,15 +1,30 @@
 var relative_path = "../../data/AB_NYC_2019.csv";
-var statenData ="../../data/Staten Island.csv";
+var statenData ="/api/staten_island";
 
 
 // Create a function to load the dataset using d3.csv
-function loadData(path) {
-    d3.csv(path).then(function(data) {
+// function loadData(path) {
+//     d3.csv(path).then(function(data) {
+//         console.log(data);
+//         mapData(data);
+
+//     });
+// }
+
+//Function to call in JSON data (API CALL)
+function loadData() {
+    d3.json(statenData).then(function(data) {
         console.log(data);
         mapData(data);
 
     });
 }
+
+// d3.json("/api/staten_island").then(function(data) {
+//     console.log(data);
+// }
+// );
+
 
 // Call the loadData function
 loadData(statenData);
