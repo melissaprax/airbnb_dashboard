@@ -112,13 +112,20 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     var words = nameString.split(" ");
     // Create an array of unique words
     var uniqueWords = [...new Set(words)];
-    // Create an array of objects with each unique word and its frequency
-    var wordFrequency = uniqueWords.map(word => {
-      return {
-        word: word,
-        frequency: words.filter(w => w === word).length
-      };
+    
+    // Create an array of arrays for word frequency
+    var wordFrequency = uniqueWords.map(word => [word, words.filter(w => w === word).length]);
+    // Sort the array of arrays by word frequency
+    wordFrequency.sort(function(a, b) {
+      return b[1] - a[1];
     });
+    // Slice the array to only include the top 100 words
+    wordFrequency = wordFrequency.slice(0, 100);
+    // Create an array of objects for word frequency
+    wordFrequency = wordFrequency.map(word => {
+      return { name: word[0], weight: word[1] };
+    });
+
     // Create High Charts word cloud
     Highcharts.chart("container", {
       accessibility: {
@@ -134,7 +141,8 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
         {
           type: "wordcloud",
           data: wordFrequency,
-          name: "Occurrences"
+          name: "Occurrences",
+          turboThreshold: 5000
         }
       ],
       title: {
@@ -148,8 +156,6 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
       }
     });
   }
-}
-
   // Create function to update histogram when a new option is selected calling updateChart
   function updateCharts(selection) {
     // Call the initHistogram function to update the plot
@@ -177,8 +183,9 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     var newSelection = d3.select(this).property("value");
     // Call the optionChanged function with the new selection
     optionChanged(newSelection);
-  });
-}).catch(function(error) {
+  }); 
+}
+).catch(function(error) {
   console.log("Error retrieving data:", error);
 });
 
