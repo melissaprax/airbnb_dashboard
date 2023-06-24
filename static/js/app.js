@@ -23,62 +23,93 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     dropdownMenu.append("option").text(option).property("value", option);
   });
 
+  // Goal (Saturday 6/24/2023): Add a level of complexity to the histogram, layering the data by room type.
+
+  // Achieve this by having three traces, one for each room type, and then using the dropdown menu to select the neighbourhood group.
+  
   // Initialize function to create histogram of price data
   function initHistogram(selection) {
-    // Fillter data to only include selected neighbourhood group
+    // Filter data to only include selected neighbourhood group
     var filteredData = data.filter(d => d.neighbourhood_group === selection);
-    // Create array of price data
-    var filteredPrice = filteredData.map(d => d.price);
+    // Create array of price data for "Entire home/apt"
+    var filteredPriceEntire = filteredData.filter(d => d.room_type === "Entire home/apt").map(d => d.price);
+    // Create array of price data for "Private room"
+    var filteredPricePrivate = filteredData.filter(d => d.room_type === "Private room").map(d => d.price);
+    // Create array of price data for "Shared room"
+    var filteredPriceShared = filteredData.filter(d => d.room_type === "Shared room").map(d => d.price);
 
+    // Create array of price data
+    // var filteredPrice = filteredData.map(d => d.price); // This is the original code
+
+
+    // Conditional Formatting for Room Type
+
+    // Note: Instead of giving each neighbourhood group a unique color, we can give each room type a unique color.
+    
     // Create a variable for a string to be concatenated in the title of the histogram for each neighbourhood group
     var title = "";
     // Set title for Bronx
     if (selection === "Bronx") {
-        title = "Bronx Airbnb Listing Price Distribution";
+        title = "Bronx: Histogram of Airbnb Listing Prices Layered by Room Type";
     }
     // Set title for Brooklyn
     else if (selection === "Brooklyn") {
-        title = "Brooklyn Airbnb Listing Price Distribution";
+        title = "Brooklyn: Histogram of Airbnb Listing Prices Layered by Room Type";
     }
     // Set title for Manhattan
     else if (selection === "Manhattan") {
-        title = "Manhattan Airbnb Listing Price Distribution";
+        title = "Manhattan: Histogram of Airbnb Listing Prices Layered by Room Type";
     }
     // Set title for Queens
     else if (selection === "Queens") {
-        title = "Queens Airbnb Listing Price Distribution";
+        title = "Queens: Histogram of Airbnb Listing Prices Layered by Room Type";
     }
     // Set title for Staten Island
     else if (selection === "Staten Island") {
-        title = "Staten Island Airbnb Listing Price Distribution";
+        title = "Staten Island: Histogram of Airbnb Listing Prices Layered by Room Type";
     }
 
-    // Set the color of the histogram bars to be unique for each neighbourhood group
+    // Create a variable for the color of the histogram bars
     var color = "";
-    // Set Bronx to be Purple
-    if (selection === "Bronx") {
-        color = "purple";
-    }
-    // Set Brooklyn to be Blue
-    else if (selection === "Brooklyn") {
+    // Set color for "Entire home/apt" to be Blue
+    if (selection === "Entire home/apt") {
         color = "blue";
     }
-    // Set Manhattan to be Red
-    else if (selection === "Manhattan") {
+    // Set color for "Private room" to be Red
+    else if (selection === "Private room") {
         color = "red";
     }
-    // Set Queens to be Green
-    else if (selection === "Queens") {
+    // Set color for "Shared room" to be Green
+    else if (selection === "Shared room") {
         color = "green";
     }
-    // Set Staten Island to be Orange
-    else if (selection === "Staten Island") {
-        color = "orange";
-    }   
 
-    // Create trace for histogram
-    var trace = {
-      x: filteredPrice,
+    // // Set the color of the histogram bars to be unique for each neighbourhood group
+    // var color = "";
+    // // Set Bronx to be Purple
+    // if (selection === "Bronx") {
+    //     color = "purple";
+    // }
+    // // Set Brooklyn to be Blue
+    // else if (selection === "Brooklyn") {
+    //     color = "blue";
+    // }
+    // // Set Manhattan to be Red
+    // else if (selection === "Manhattan") {
+    //     color = "red";
+    // }
+    // // Set Queens to be Green
+    // else if (selection === "Queens") {
+    //     color = "green";
+    // }
+    // // Set Staten Island to be Orange
+    // else if (selection === "Staten Island") {
+    //     color = "orange";
+    // }   
+
+    // Create trace for Entire home/apt
+    var trace1 = {
+      x: filteredPriceEntire,
       type: "histogram",
         marker: {
             color: color,
@@ -86,15 +117,44 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
                 color: "black",
                 width: 1
             }
-        }
+        },
+        name: "Entire home/apt"
+    };
+    // Create trace for Private room
+    var trace2 = {
+      x: filteredPricePrivate,
+      type: "histogram",
+        marker: {
+            color: color,
+            line: {
+                color: "black",
+                width: 1
+            }
+        },
+        name: "Private Room"
+    };
+    // Create trace for Shared room
+    var trace3 = {
+      x: filteredPriceShared,
+      type: "histogram",
+        marker: {
+            color: color,
+            line: {
+                color: "black",
+                width: 1
+            }
+        },
+        name: "Shared Room"
     };
     // Create data array for plot
-    var plotData = [trace];
+    var plotData = [trace1, trace2, trace3];
     // Create layout for plot
     var layout = {
       title: title,
       xaxis: { title: "Price", range: [-25, 500]},
-      yaxis: { title: "Count" }
+      yaxis: { title: "Count" },
+      // Overlay histograms
+      barmode: "overlay"
     };
     // Plot the histogram
     Plotly.newPlot("histogram", plotData, layout);
