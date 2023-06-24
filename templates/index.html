@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>NYC AirBnB Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
@@ -15,49 +16,54 @@
     crossorigin=""></script>
         <!-- Marker cluster JavaScript code -->
         <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./static/css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <!-- for API Call -->
   <script src="{{url_for('static',filename='js/map.js')}}"></script>
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>NYC Airbnb</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
-      </div>
-    </div>
-    <div id="map" class="map"></div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="well">
-            <!-- The div that holds our map -->
-          <h5>Ready</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Ready</h3>
+  <!-- container div (bootstrap requirment for layout) -->
+  <div class="container-fluid">
+    <!-- Nav -->
+    <ul class="nav nav-fill padding10px">
+      <li class="nav-item">
+        <div>New York City AirBnB Dashboard</div>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
-          <div id="sample-metadata" class="panel-body"></div>
         </div>
-      </div>
-      <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div>
-    </div>
-    <div class = "row"></div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
-      </div>
-    </div>
+      </li>
+    </ul>
+<!-- End of Nav -->
+<!-- Map populates in div below: -->
+<div class="row">
+  <div class="col-7">
+    <div id="map" class="map"></div>
   </div>
+  <div class="col-5">
+    <div class="padding10px">Welcome to our AirBnB dashboard.
+      Use the dropdown button above to choose a neighborhood
+      and view our visualizations, including: an interactive map, a histogram and word cloud.
+    </div>
+    <hr />
+    <div class="visualFillers">Where histogram will go</div>
+    <hr />
+    <div class="visualFillers">Where wordcloud will go</div>
+  </div>
+</div>
+
+    <!-- closing div below for bootstrap container -->
+  </div>
+
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>

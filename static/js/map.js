@@ -1,5 +1,5 @@
 var relative_path = "../../data/AB_NYC_2019.csv";
-var statenData ="/api/staten_island";
+var apiData ="/api/data";
 
 
 // Create a function to load the dataset using d3.csv
@@ -13,7 +13,7 @@ var statenData ="/api/staten_island";
 
 //Function to call in JSON data (API CALL)
 function loadData() {
-    d3.json(statenData).then(function(data) {
+    d3.json(apiData).then(function(data) {
         console.log(data);
         mapData(data);
 
@@ -27,7 +27,7 @@ function loadData() {
 
 
 // Call the loadData function
-loadData(statenData);
+loadData(apiData);
 
 
 

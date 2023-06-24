@@ -48,25 +48,25 @@ def welcome():
 def data():
     return jsonify(df.to_dict(orient="records"))
 
-@app.route("/api/staten_island")
-def staten_island():
-    return jsonify(staten_island_df.to_dict(orient="records"))
+# @app.route("/api/staten_island")
+# def staten_island():
+#     return jsonify(staten_island_df.to_dict(orient="records"))
 
-@app.route("/api/bronx")
-def bronx():
-    return jsonify(bronx_df.to_dict(orient="records"))
+# @app.route("/api/bronx")
+# def bronx():
+#     return jsonify(bronx_df.to_dict(orient="records"))
 
-@app.route("/api/queens")
-def queens():
-    return jsonify(queens_df.to_dict(orient="records"))
+# @app.route("/api/queens")
+# def queens():
+#     return jsonify(queens_df.to_dict(orient="records"))
 
-@app.route("/api/brooklyn")
-def bronx():
-    return jsonify(brooklyn_df.to_dict(orient="records"))
+# @app.route("/api/brooklyn")
+# def bronx():
+#     return jsonify(brooklyn_df.to_dict(orient="records"))
 
-@app.route("/api/manhattan")
-def bronx():
-    return jsonify(manhattan_df.to_dict(orient="records"))
+# @app.route("/api/manhattan")
+# def bronx():
+#     return jsonify(manhattan_df.to_dict(orient="records"))
 
 if __name__ == "__main__":
     app.run(debug=True)
