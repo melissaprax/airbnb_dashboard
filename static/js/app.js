@@ -5,8 +5,18 @@
 // JavaScript wants information.
 
 // Get Data:
-
-// Draft II:
+// // Check Staten Island data in the console:
+// d3.json("http://127.0.0.1:5000/api/staten_island").then(function(data) {
+//   console.log(data);
+// });
+// // Check Bronx data in the console:
+// d3.json("http://127.0.0.1:5000/api/bronx").then(function(data) {
+//   console.log(data);
+// });
+// // Check Queens data in the console:
+// d3.json("http://127.0.0.1:5000/api/queens").then(function(data) {
+//   console.log(data);
+// });
 
 // Use d3.json() to request data from the Flask app
 d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
