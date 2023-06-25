@@ -1,0 +1,28 @@
+Yesterday I learned that a histogram on a linear y-axis does not accurately display the full range of price data.
+
+Furthermore, few insights can be gleaned without further disaggregation beyond the level of neighbourhood group.
+
+I experimented with a violin plot with a logarithmic y-axis scale in R, grouped by room type. 
+
+That was a much more effective plot than the histogram. However, it does not bode well with the current drop-down design as the user
+would not be able to make comparisons between areas of NYC if upon dropdown selection, the violin plot only displayed 1 group at a time.
+
+
+///
+
+Secondly, the word cloud takes a very long time to generate because of the name field's string processing in JavaScript.
+
+The word frequency calculation needs to be performed in app.py.
+
+///
+
+Thirdly, this application need be set up with the near complete API.
+
+
+/// 
+
+Step 1: Make a violin plot with price and room type data.
+
+Step 2: Process the airbnb.name word frequency data in python and set up a route for this data.
+
+Step 3: Test this application with the full API.
