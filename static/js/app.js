@@ -22,6 +22,8 @@
 d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   console.log(data);
 
+  // Section 1: Create a dropdown menu to allow users to select a neighbourhood group
+  
   // Create a variable for a dropdown menu
   var dropdownMenu = d3.select("#selDataset");
 
@@ -32,11 +34,49 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   dropdownOptions.forEach(function(option) {
     dropdownMenu.append("option").text(option).property("value", option);
   });
-
-  // Goal (Saturday 6/24/2023): Add a level of complexity to the histogram, layering the data by room type.
-
-  // Achieve this by having three traces, one for each room type, and then using the dropdown menu to select the neighbourhood group.
   
+  // Section 2: Create a map to plot the latitude and longitude of Airbnb listings
+  
+  // Define variables necessary to create the map
+
+  // Create a variable for the map options
+  var mapOptions = {
+    center: [40.73, -74.0059],
+    zoom: 10,
+    minZoom: 10,
+    maxZoom: 18
+  }
+  // Create a variable for the map
+  var map = L.map("map", mapOptions);
+
+  // Create a variable for the tile layer
+  var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+  
+  // Add the layer to the map
+  map.addLayer(layer);
+
+  // Initialize function to create and add markers to the map
+  function initMap(selection) {
+    // Filter data to only include selected neighbourhood group
+    var filteredData = data.filter(d => d.neighbourhood_group === selection);
+    // Create a variable for the markers
+    var markers = L.markerClusterGroup();
+    // Loop through data
+    for (var i in filteredData) {
+      var row = filteredData[i];
+      // Console log latitude and longitude
+      console.log(row.latitude, row.longitude);
+      // Add a marker to the map
+      markers.addLayer(L.marker([row.latitude, row.longitude]));
+      // Bind a popup to the marker
+      markers.bindPopup("<h3>" + row.name + "</h3><hr><p>Neighbourhood: " + row.neighbourhood + "</p><p>Room Type: " + row.room_type + "</p><p>Price: $" + row.price + "</p>");
+      // Add the markers to the map
+      markers.addTo(map);
+    }
+  }
+  
+  // Section 3: Create a histogram to visualize the price of Airbnb listings
+
   // Initialize function to create histogram of price data
   function initHistogram(selection) {
     // Filter data to only include selected neighbourhood group
@@ -170,6 +210,8 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     Plotly.newPlot("histogram", plotData, layout);
   }
 
+  // Section 4: Create a word cloud to visualize the word frequencies of names of Airbnb listings
+  
   // Create a function to initialize word cloud of listing names
   function initWordCloud(selection) {
     // Filter data to only include selected neighbourhood group
@@ -197,7 +239,7 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     });
 
     // Create High Charts word cloud
-    Highcharts.chart("container", {
+    Highcharts.chart("wordcloud", {
       accessibility: {
         screenReaderSection: {
           beforeChartFormat:
@@ -226,8 +268,13 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
       }
     });
   }
+  
+  // Section 5: Activate and initialize the charts
+  
   // Create function to update histogram when a new option is selected calling updateChart
   function updateCharts(selection) {
+    // Call the initMap function to update the map
+    initMap(selection);
     // Call the initHistogram function to update the plot
     initHistogram(selection);
     // Call the getWordCloudData function to update the word cloud
@@ -244,8 +291,9 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   var firstSelection = dropdownOptions[0];
 
   // Initialize the charts
+  initMap(firstSelection);
   initHistogram(firstSelection);
-  initWordCloud(firstSelection); // Left off here 8:59pm 4/25/2021
+  initWordCloud(firstSelection);
 
   // Set up event listener for when a new option is selected
   dropdownMenu.on("change", function() {

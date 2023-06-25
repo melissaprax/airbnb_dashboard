@@ -22,11 +22,11 @@ con = engine.connect()
 
 df = pd.read_sql(sqlalchemy.text("SELECT * FROM airbnb"), con=con)
 
-staten_island_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Staten Island'"), con=con)
-bronx_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Bronx'"), con=con)
-queens_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Queens'"), con=con)
-brooklyn_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Brooklyn'"), con=con)
-manhattan_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Manhattan'"), con=con)
+# staten_island_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Staten Island'"), con=con)
+# bronx_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Bronx'"), con=con)
+# queens_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Queens'"), con=con)
+# brooklyn_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Brooklyn'"), con=con)
+# manhattan_df = pd.read_sql(sqlalchemy.text("SELECT id, neighbourhood_group, latitude, longitude, room_type FROM airbnb WHERE neighbourhood_group = 'Manhattan'"), con=con)
 
 # This is an HTML route. It's a route that returns HTML instead of JSON.
 
