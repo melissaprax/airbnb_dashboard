@@ -54,10 +54,14 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   // Add the layer to the map
   map.addLayer(layer);
 
+  // Note: When you don't clear markers, you get a new set of markers every time you select a new neighbourhood group.
+  // The function is doing work that it doesn't need to do.
+
   // Initialize function to create and add markers to the map
-  function initMap(selection) {
+  function initMap(selection) { 
     // Filter data to only include selected neighbourhood group
-    var filteredData = data.filter(d => d.neighbourhood_group === selection);
+    // var filteredData = data.filter(d => d.neighbourhood_group === selection);
+    var filteredData = data 
     // Create a variable for the markers
     var markers = L.markerClusterGroup();
     // Loop through data
@@ -66,14 +70,21 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
       // Console log latitude and longitude
       //console.log(row.latitude, row.longitude);
       // Add a marker to the map
-      markers.addLayer(L.marker([row.latitude, row.longitude]));
+      // markers.addLayer(L.marker([row.latitude, row.longitude]));
+      var marker = L.marker([row.latitude, row.longitude]);
       // Bind a popup to the marker
-      markers.bindPopup("<h3>" + row.name + "</h3><hr><p>Neighbourhood: " + row.neighbourhood + "</p><p>Room Type: " + row.room_type + "</p><p>Price: $" + row.price + "</p>");
-      // Add the markers to the map
-      markers.addTo(map);
-    }
+      marker.bindPopup("<h3>" + row.name + "</h3><hr><p>Neighbourhood: " + row.neighbourhood + "</p><p>Room Type: " + row.room_type + "</p><p>Price: $" + row.price + "</p>");
+      // markers.bindPopup("<h3>" + row.name + "</h3><hr><p>Neighbourhood: " + row.neighbourhood + "</p><p>Room Type: " + row.room_type + "</p><p>Price: $" + row.price + "</p>");
+      // Add marker to markers
+      markers.addLayer(marker);
+      // Add markers to map
+      // markers.addTo(map);
+    } 
+    // Add markers to map outside of for loop
+    markers.addTo(map);
   }
-  
+  // Add markers at each neighbourhood group's center (unique from the smaller ones and always present)
+
   // Section 3: Create a histogram to visualize the price of Airbnb listings
 
   // Initialize function to create histogram of price data
@@ -267,8 +278,30 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   
   // Create function to update histogram when a new option is selected calling updateChart
   function updateCharts(selection) {
+    // Set view of Map
+    // q: What are the coordinate of each neighbourhood group?
+    // a: Manhattan: 40.7831° N, 73.9712° W
+    //    Brooklyn: 40.6782° N, 73.9442° W
+    //    Queens: 40.7282° N, 73.7949° W
+    //    Bronx: 40.8448° N, 73.8648° W
+    //    Staten Island: 40.5795° N, 74.1502° W
+    if (selection === "Manhattan") {
+      map.panTo(new L.LatLng(40.7831, -73.9712));
+    }
+    else if (selection === "Brooklyn") {
+      map.panTo(new L.LatLng(40.6782, -73.9442));
+    }
+    else if (selection === "Queens") {
+      map.panTo(new L.LatLng(40.7282, -73.7949));
+    }
+    else if (selection === "Bronx") {
+      map.panTo(new L.LatLng(40.8448, -73.8648));
+    }
+    else if (selection === "Staten Island") {
+      map.panTo(new L.LatLng(40.5795, -74.1502));
+    }
     // Call the initMap function to update the map
-    initMap(selection);
+    // initMap(selection);
     // Call the initHistogram function to update the plot
     initHistogram(selection);
     // Call the getWordCloudData function to update the word cloud
