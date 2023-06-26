@@ -20,8 +20,7 @@
 
 // Use d3.json() to request data from the Flask app
 d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
-  console.log(data);
-
+  
   // Section 1: Create a dropdown menu to allow users to select a neighbourhood group
   
   // Create a variable for a dropdown menu
@@ -65,7 +64,7 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     for (var i in filteredData) {
       var row = filteredData[i];
       // Console log latitude and longitude
-      console.log(row.latitude, row.longitude);
+      //console.log(row.latitude, row.longitude);
       // Add a marker to the map
       markers.addLayer(L.marker([row.latitude, row.longitude]));
       // Bind a popup to the marker
@@ -117,52 +116,14 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     // Set title for Staten Island
     else if (selection === "Staten Island") {
         title = "Staten Island: Histogram of Airbnb Listing Prices Layered by Room Type";
-    }
-
-    // Create a variable for the color of the histogram bars
-    var color = "";
-    // Set color for "Entire home/apt" to be Blue
-    if (selection === "Entire home/apt") {
-        color = "blue";
-    }
-    // Set color for "Private room" to be Red
-    else if (selection === "Private room") {
-        color = "red";
-    }
-    // Set color for "Shared room" to be Green
-    else if (selection === "Shared room") {
-        color = "green";
-    }
-
-    // // Set the color of the histogram bars to be unique for each neighbourhood group
-    // var color = "";
-    // // Set Bronx to be Purple
-    // if (selection === "Bronx") {
-    //     color = "purple";
-    // }
-    // // Set Brooklyn to be Blue
-    // else if (selection === "Brooklyn") {
-    //     color = "blue";
-    // }
-    // // Set Manhattan to be Red
-    // else if (selection === "Manhattan") {
-    //     color = "red";
-    // }
-    // // Set Queens to be Green
-    // else if (selection === "Queens") {
-    //     color = "green";
-    // }
-    // // Set Staten Island to be Orange
-    // else if (selection === "Staten Island") {
-    //     color = "orange";
-    // }   
+    }   
 
     // Create trace for Entire home/apt
     var trace1 = {
       x: filteredPriceEntire,
       type: "histogram",
         marker: {
-            color: color,
+            color: 'blue',
             line: {
                 color: "black",
                 width: 1
@@ -175,7 +136,7 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
       x: filteredPricePrivate,
       type: "histogram",
         marker: {
-            color: color,
+            color: 'orange',
             line: {
                 color: "black",
                 width: 1
@@ -188,7 +149,7 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
       x: filteredPriceShared,
       type: "histogram",
         marker: {
-            color: color,
+            color: 'green',
             line: {
                 color: "black",
                 width: 1
@@ -223,20 +184,53 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     // Create an array of all words in the string
     var words = nameString.split(" ");
     // Create an array of unique words
-    var uniqueWords = [...new Set(words)];
+    //var uniqueWords = [...new Set(words)];
     
-    // Create an array of arrays for word frequency
-    var wordFrequency = uniqueWords.map(word => [word, words.filter(w => w === word).length]);
-    // Sort the array of arrays by word frequency
-    wordFrequency.sort(function(a, b) {
-      return b[1] - a[1];
+    var frequencyMap = {};
+
+    words.forEach(word => {
+      frequencyMap[word] = (frequencyMap[word] || 0) + 1;
     });
-    // Slice the array to only include the top 100 words
-    wordFrequency = wordFrequency.slice(0, 100);
-    // Create an array of objects for word frequency
-    wordFrequency = wordFrequency.map(word => {
-      return { name: word[0], weight: word[1] };
-    });
+
+    var wordFrequency = Object.entries(frequencyMap)
+      .map(([word, frequency]) => ({ name: word, weight: frequency }))
+
+    // Sort the array of objects by word frequency
+    function quicksort(arr) {
+      if (arr.length <= 1) {
+        return arr;
+      }
+      const pivot = arr[Math.floor(arr.length / 2)].weight;
+      const left = [];
+      const right = [];
+
+      for (const item of arr) {
+        if (item.weight > pivot) {
+          left.push(item);
+        } else if (item.weight < pivot) {
+          right.push(item);
+        }
+      }
+      return quicksort(left).concat(arr.filter(item => item.weight === pivot), quicksort(right));
+    }
+
+    // Sort the array of objects by word frequency using quickSort function
+    wordFrequency = quicksort(wordFrequency).slice(0, 100);
+
+
+    // Original Method:
+    // // Create an array of arrays for word frequency
+    // var wordFrequency = uniqueWords.map(word => [word, words.filter(w => w === word).length]);
+    // // Sort the array of arrays by word frequency
+    // wordFrequency.sort(function(a, b) {
+    //   return b[1] - a[1];
+    // });
+    // // Slice the array to only include the top 100 words
+    // wordFrequency = wordFrequency.slice(0, 100);
+    // // Create an array of objects for word frequency
+    // wordFrequency = wordFrequency.map(word => {
+    //   return { name: word[0], weight: word[1] };
+    // });
 
     // Create High Charts word cloud
     Highcharts.chart("wordcloud", {
@@ -301,11 +295,16 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
     var newSelection = d3.select(this).property("value");
     // Call the optionChanged function with the new selection
     optionChanged(newSelection);
-  }); 
+  });
 }
 ).catch(function(error) {
   console.log("Error retrieving data:", error);
 });
+
+
+// 
+
+
 
 // Notes for future reference: 
 // 1. Consider whether adding number of listing to the histogram would be useful
@@ -411,3 +410,43 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
 // }
 
 // Test the other neighbourhood groups to view their price distributions. Note: remove range argument from layout to view all data
+
+// Cut from Draft II:
+
+// // Create a variable for the color of the histogram bars
+    // var color = "";
+    // // Set color for "Entire home/apt" to be Blue
+    // if (selection === "Entire home/apt") {
+    //     color = "blue";
+    // }
+    // // Set color for "Private room" to be Red
+    // else if (selection === "Private room") {
+    //     color = "red";
+    // }
+    // // Set color for "Shared room" to be Green
+    // else if (selection === "Shared room") {
+    //     color = "green";
+    // }
+
+    // // Set the color of the histogram bars to be unique for each neighbourhood group
+    // var color = "";
+    // // Set Bronx to be Purple
+    // if (selection === "Bronx") {
+    //     color = "purple";
+    // }
+    // // Set Brooklyn to be Blue
+    // else if (selection === "Brooklyn") {
+    //     color = "blue";
+    // }
+    // // Set Manhattan to be Red
+    // else if (selection === "Manhattan") {
+    //     color = "red";
+    // }
+    // // Set Queens to be Green
+    // else if (selection === "Queens") {
+    //     color = "green";
+    // }
+    // // Set Staten Island to be Orange
+    // else if (selection === "Staten Island") {
+    //     color = "orange";
+    // }
