@@ -1,23 +1,5 @@
-// In the mapping exercise, we used the http module to create a web server.
-
-// Javascript can't get files from your computer, but it can get them from a web server.
-
-// JavaScript wants information.
 
 // Get Data:
-// // Check Staten Island data in the console:
-// d3.json("http://127.0.0.1:5000/api/staten_island").then(function(data) {
-//   console.log(data);
-// });
-// // Check Bronx data in the console:
-// d3.json("http://127.0.0.1:5000/api/bronx").then(function(data) {
-//   console.log(data);
-// });
-// // Check Queens data in the console:
-// d3.json("http://127.0.0.1:5000/api/queens").then(function(data) {
-//   console.log(data);
-// });
-
 // Use d3.json() to request data from the Flask app
 d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   
@@ -279,12 +261,12 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
   // Create function to update histogram when a new option is selected calling updateChart
   function updateCharts(selection) {
     // Set view of Map
-    // q: What are the coordinate of each neighbourhood group?
-    // a: Manhattan: 40.7831° N, 73.9712° W
-    //    Brooklyn: 40.6782° N, 73.9442° W
-    //    Queens: 40.7282° N, 73.7949° W
-    //    Bronx: 40.8448° N, 73.8648° W
-    //    Staten Island: 40.5795° N, 74.1502° W
+    //  Coordinates for each neighbourhood group:
+    //  Manhattan: 40.7831° N, 73.9712° W
+    //  Brooklyn: 40.6782° N, 73.9442° W
+    //  Queens: 40.7282° N, 73.7949° W
+    //  Bronx: 40.8448° N, 73.8648° W
+    //  Staten Island: 40.5795° N, 74.1502° W
     if (selection === "Manhattan") {
       map.panTo(new L.LatLng(40.7831, -73.9712));
     }
@@ -333,153 +315,3 @@ d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
 ).catch(function(error) {
   console.log("Error retrieving data:", error);
 });
-
-
-// 
-
-
-
-// Notes for future reference: 
-// 1. Consider whether adding number of listing to the histogram would be useful
-// 2. Consider if standardizing the number of bins would be better than using the default
-// 3. Consider whether numerical summary statistics would be welcome additions to the dashboard
-
-
-
-
-// Draft I:
-
-// // Use d3.json() to request data from the Flask app
-// d3.json("http://127.0.0.1:5000/api/data").then(function(data) {
-//     console.log(data);
-
-//     // Create a variable for a dropdown menu
-//     var dropdownMenu = d3.select("#selDataset");
-
-//     // Set unique neighbourhood groups as dropdown options
-//     var dropdownOptions = [...new Set(data.map(d => d.neighbourhood_group))];
-
-//     // Append dropdown options to the dropdown menu
-//     dropdownOptions.forEach(function(option) {
-//         dropdownMenu.append("option").text(option).property("value", option);
-//     });
-
-// // Initialize function to create histogram of price data
-// function initHistogram(selection) {
-//     // Fillter data to only include selected neighbourhood group
-//     var filteredData = data.filter(d => d.neighbourhood_group === selection);
-//     // Create array of price data
-//     var filteredPrice = filteredData.map(d => d.price);
-//     // Create trace for histogram
-//     var trace = {
-//         x: filteredPrice,
-//         type: "histogram"
-//     };
-//     // Create data array for plot
-//     var data = [trace];
-//     // Create layout for plot
-//     var layout = {
-//         title: "Price Distribution",
-//         xaxis: { title: "Price", range: [0,1300] },
-//         yaxis: { title: "Count" }
-//     };
-//     // Plot the histogram
-//     Plotly.newPlot("histogram", data, layout);
-// }
-// // Create function to update histogram when a new option is selected calling updateChart
-// function updateChart(selection) {
-//     // Call the initHistogram function to update the plot
-//     initHistogram(selection);
-// }
-
-// // Create function to handle change in dropdown menu
-// function optionChanged(selection) {
-//     // Call updateChart function with the new selection
-//     updateChart(selection);
-// }
-    
-// // Get the first selection to initialize the plot
-// var firstSelection = dropdownOptions[0];
-
-// // Initialize the plot
-// initHistogram(firstSelection);
-
-// // Set up event listener for when a new option is selected
-// dropdownMenu.on("change", function() {
-//     // Get the new selection
-//     var newSelection = d3.select(this).property("value");
-//     // Call the optionChanged function with the new selection
-//     optionChanged(newSelection);
-// });
-// });
-
-
-// Original Notes:
-
-// Write createHistogram function to create a histogram of the price data.
-
-// Use the .filter function to filter the data to only the Staten Island neighborhood.
-
-// function createHistogram(sample) {
-
-//     var filteredData = sample.filter(d => d.neighbourhood_group === neighbourhoodGroup);
-
-//     var filteredPrice = filteredData.map(d => d.price);
-
-//     var trace = {
-//         x: filteredPrice,
-//         type: "histogram"
-//     };
-
-//     var data = [trace];
-
-//     var layout = {
-//         title: "Brooklyn Price Distribution",
-//         xaxis: { title: "Price", range: [0,1300] },
-//         yaxis: { title: "Count" }
-//     };
-
-//     Plotly.newPlot("histogram", data, layout);
-// }
-
-// Test the other neighbourhood groups to view their price distributions. Note: remove range argument from layout to view all data
-
-// Cut from Draft II:
-
-// // Create a variable for the color of the histogram bars
-    // var color = "";
-    // // Set color for "Entire home/apt" to be Blue
-    // if (selection === "Entire home/apt") {
-    //     color = "blue";
-    // }
-    // // Set color for "Private room" to be Red
-    // else if (selection === "Private room") {
-    //     color = "red";
-    // }
-    // // Set color for "Shared room" to be Green
-    // else if (selection === "Shared room") {
-    //     color = "green";
-    // }
-
-    // // Set the color of the histogram bars to be unique for each neighbourhood group
-    // var color = "";
-    // // Set Bronx to be Purple
-    // if (selection === "Bronx") {
-    //     color = "purple";
-    // }
-    // // Set Brooklyn to be Blue
-    // else if (selection === "Brooklyn") {
-    //     color = "blue";
-    // }
-    // // Set Manhattan to be Red
-    // else if (selection === "Manhattan") {
-    //     color = "red";
-    // }
-    // // Set Queens to be Green
-    // else if (selection === "Queens") {
-    //     color = "green";
-    // }
-    // // Set Staten Island to be Orange
-    // else if (selection === "Staten Island") {
-    //     color = "orange";
-    // }
