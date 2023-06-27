@@ -59,14 +59,12 @@ for (var i in data) {
 
     try {
         if(row.latitude && row.longitude){
-            markers.addLayer(L.marker([row.latitude, row.longitude]));
-            // map.addLayer(markers);
 
-            // var marker = L.marker([row.latitude, row.longitude], {
-            //     opacity: 1
-            // }).bindPopup(row.Title);
+            markers.addLayer(L.marker([row.latitude, row.longitude])
+            .bindPopup("test"));
 
-            markers.addTo(map);
+            map.addLayer(markers);
+            // markers.addTo(map);
         }
 
 

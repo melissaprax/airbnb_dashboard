@@ -1,5 +1,5 @@
 .map {
-    width: 500px;
+    width: auto;
     height: 580px;
 }
 .padding10px {
@@ -9,4 +9,9 @@
     width: auto;
     height: 200px;
 }
+.extraMargin {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 
