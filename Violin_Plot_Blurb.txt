@@ -1,0 +1,7 @@
+Violin Plot:
+
+Airbnb listing prices in this dataset range from $10 per night to $10,000. While a histogram on a linear scale with an x-axis range of 0-500 captures the vast majority of the price distribution (97.5% of listing), it fails to captures upper extremes and their variance over neighborhood groups. 
+
+The violin plot above, while not interactive, displays the full range of listing price data using a logarithmic y-axis scale. In ascending order, the neighborhood groups are arranged according to their median listing price, ranging from $65 in the Bronx to $150 in Manhattan.
+The relative price of listing by room type (Entire home/apartment, Private Room, Shared Room)
+is consistent, as predicted, across all neighborhood groups.
